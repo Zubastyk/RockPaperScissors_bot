@@ -4,6 +4,8 @@ import logging
 from aiogram import Bot, Dispatcher
 from config_data.config import Config, load_config
 from handlers import other_handlers, user_handlers
+from aiogram.client.bot import DefaultBotProperties
+from aiogram.enums import ParseMode
 
 # Инициалзация логгера
 logger = logging.getLogger(__name__)
@@ -22,8 +24,8 @@ async def main():
     config: Config = load_config()
 
     # Инициализация бота и диспетчера
-    bot = Bot(token=config.tg_bot.token)#,
-              #parse_mode='HTML')
+    bot = Bot(token=config.tg_bot.token,
+              default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
     # Регистрация роутеров
